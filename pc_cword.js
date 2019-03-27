@@ -7,8 +7,8 @@
 
    Crossword Puzzle Script
    
-   Author: 
-   Date:   
+   Author: Evelyn Duarte
+   Date: 3/26/19  
    
    Global Variables
    ================
@@ -49,11 +49,36 @@
 
 */
 
+var allLetters;
+var currentLetter;
+var wordLetters;
+var acrossClue;
+var downClue;
+var typeDirection;
+
+window.onload = init;
+
+function init() {
+      allLetters = document.querySelectorAll("table#crossword span");
+      currentLetter = allLetters[0];
+      var acrossID = currentLetter.dataset.clueA;
+      var downID = currentLetter.dataset.clueD;
+      acrossClue = document.getElementById(currentLetter.dataset.clueA);
+      downClue = document.getElementById(currentLetter.dataset.clueD);
+      formatPuzzle(currentLetter)
+      for (let i = 0; i < allLetters.length; i++) {
+            allLetters[i].style.cursor = "pointer";
+            allLetters[i].onEvent("mousedown", function (e) {
+                  formatPuzzle(e.target);
+            });
+      }
+      document.keydown = selectLetter;
+}
 
 
 
 
-   
+
 
 
 
@@ -62,5 +87,5 @@
 /*====================================================*/
 
 function getChar(keyNum) {
-   return String.fromCharCode(keyNum);
+      return String.fromCharCode(keyNum);
 }

@@ -54,7 +54,7 @@ var currentLetter;
 var wordLetters;
 var acrossClue;
 var downClue;
-var typeDirection;
+var typeDirection = "right";
 
 window.onload = init;
 
@@ -65,18 +65,51 @@ function init() {
       var downID = currentLetter.dataset.clueD;
       acrossClue = document.getElementById(currentLetter.dataset.clueA);
       downClue = document.getElementById(currentLetter.dataset.clueD);
-      formatPuzzle(currentLetter)
-      for (let i = 0; i < allLetters.length; i++) {
+      formatPuzzle(currentLetter);
+      for (var i = 0; i < allLetters.length; i++) {
             allLetters[i].style.cursor = "pointer";
-            allLetters[i].onEvent("mousedown", function (e) {
+            allLetters[i].onmousedown = function (e) {
                   formatPuzzle(e.target);
-            });
+            };
       }
-      document.keydown = selectLetter;
 }
 
 
 
+function formatPuzzle(puzzleLetter) {
+      for (var i = 0; i < allLetters.length; i++) {
+            allLetters[i].style.color = "";
+      }
+      acrossClue.style.color = "";
+      downClue.style.color = "";
+
+      if (currentLetter.dataset.clueA !== undefined) {
+            acrossClue = document.getElementById("acrossID");
+            acrossClue[i].style.color = "blue";
+            wordLetters = document.querySelectorAll("[data-clue-A =" + dataLetter.dataset.clueA + "]");
+            for (var i = 0; i < wordLetters.length; i++) {
+                  wordLetters[i].style.background = "rgb(231, 231, 255)"
+            }
+      }
+      if (currentLetter.dataset.clueD !== undefined) {
+            downClue = document.getElementById("downID");
+            downClue[i].style.color = "red";
+            wordLetters = document.querySelectorAll("[data-clue-D =" + dataLetter.dataset.clueD + "]");
+            for (var i = 0; i < wordLetters.length; i++) {
+                  wordLetters[i].style.background = "rgb(255, 231, 231)"
+            }
+
+      }
+      if (typeDirection = "right") {
+            currentLetter[i].style.color = "rgb(191, 191, 255)";
+      } else {
+            currentLetter[i].style.color = "rgb(255, 191, 191)";
+      }
+}
+
+function selectLetter(e) {
+
+}
 
 
 
